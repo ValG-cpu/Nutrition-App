@@ -7,6 +7,10 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        working-directory: product-app
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -22,9 +26,4 @@ jobs:
           pip install fastapi uvicorn pytest httpx pydantic
 
       - name: Run tests
-        run: |
-          if [ -d "product-app/tests" ]; then
-            pytest product-app/tests
-          else
-            echo "No tests found"
-          fi
+        run: pytest tests
